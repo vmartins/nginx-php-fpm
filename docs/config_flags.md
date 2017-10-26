@@ -36,3 +36,5 @@ The following flags are a list of all the currently supported options that can b
 | APPLICATION_ENV               | Set this to development to prevent composer deleting local development dependencies                            |
 | SKIP_CHOWN                    | Set to 1 to avoid running chown -Rf on /var/www/html                                                           |
 | SKIP_COMPOSER                 | Set to 1 to avoid installing composer                                                                          |
+| HTTP_PORT                     | Set HTTP port, default is 80                                                                                   |
+| HTTPS_PORT                    | Set HTTPS port, default is 443                                                                                 |

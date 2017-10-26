@@ -150,6 +150,20 @@ if [ ! -z "$NGINX_FASTCGI_READ_TIMEOUT" ]; then
     fi
 fi
 
+# Change the http server port
+if [ ! -z "$HTTP_PORT" ]; then
+    sed -i "s/listen 80;/listen ${HTTP_PORT};/g" /etc/nginx/sites-available/default.conf
+    sed -i "s/listen \[::\]:80 default/listen \[::\]:${HTTP_PORT} default/g" /etc/nginx/sites-available/default.conf
+fi
+
+# Change the https server port
+if [ ! -z "$HTTPS_PORT" ]; then
+    if [ -f /etc/nginx/sites-available/default-ssl.conf ]; then
+        sed -i "s/listen \[::\]:443 ssl/listen \[::\]:${HTTPS_PORT} ssl/g" /etc/nginx/sites-available/default-ssl.conf
+        sed -i "s/listen \[::\]:443 ssl/listen \[::\]:${HTTPS_PORT} ssl/g" /etc/nginx/sites-available/default-ssl.conf
+    fi
+fi
+
 # Enable xdebug
 XdebugFile='/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini'
 if [[ "$ENABLE_XDEBUG" == "1" ]] ; then
