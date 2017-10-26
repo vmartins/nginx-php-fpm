@@ -137,6 +137,11 @@ if [ ! -z "$PHP_UPLOAD_MAX_FILESIZE" ]; then
     sed -i "s/upload_max_filesize = 100M/upload_max_filesize= ${PHP_UPLOAD_MAX_FILESIZE}M/g" /usr/local/etc/php/conf.d/docker-vars.ini
 fi
 
+# Change the PHP flag max_execution_time
+if [ ! -z "$PHP_MAX_EXECUTION_TIME" ]; then
+    sed -i "s/max_execution_time = 30/max_execution_time= ${PHP_MAX_EXECUTION_TIME}/g" /usr/local/etc/php/conf.d/docker-vars.ini
+fi
+
 # Enable xdebug
 XdebugFile='/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini'
 if [[ "$ENABLE_XDEBUG" == "1" ]] ; then
