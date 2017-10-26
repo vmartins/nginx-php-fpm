@@ -13,6 +13,7 @@ The following flags are a list of all the currently supported options that can b
 | SSH_KEY            | Private SSH deploy key for your repository base64 encoded (requires write permissions for pushing)                                                                                                                         |
 | GIT_PERSONAL_TOKEN | Personal access token for your git account (required for HTTPS git access)                                                                                                                                                 |
 | GIT_USERNAME       | Git username for use with personal tokens. (required for HTTPS git access)                                                                                                                                                 |
+| GIT_CLONE_DEPTH    | Create a shallow clone with a history truncated to the specified number of commits (optional)                                                                                                                                         |
 
 ### Others
 

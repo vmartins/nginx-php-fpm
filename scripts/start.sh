@@ -50,6 +50,10 @@ if [ ! -d "/var/www/html/.git" ]; then
             GIT_COMMAND=${GIT_COMMAND}" -b ${GIT_BRANCH}"
         fi
 
+        if [ ! -z "$GIT_CLONE_DEPTH" ]; then
+            GIT_COMMAND=${GIT_COMMAND}" --depth=${GIT_CLONE_DEPTH}"
+        fi
+
         if [ -z "$GIT_USERNAME" ] && [ -z "$GIT_PERSONAL_TOKEN" ]; then
             GIT_COMMAND=${GIT_COMMAND}" ${GIT_REPO}"
         else
