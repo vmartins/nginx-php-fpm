@@ -142,6 +142,14 @@ if [ ! -z "$PHP_MAX_EXECUTION_TIME" ]; then
     sed -i "s/max_execution_time = 30/max_execution_time= ${PHP_MAX_EXECUTION_TIME}/g" /usr/local/etc/php/conf.d/docker-vars.ini
 fi
 
+# Change the nginx param fastcgi_read_timeout
+if [ ! -z "$NGINX_FASTCGI_READ_TIME" ]; then
+    sed -i "s/fastcgi_read_timeout 300;/fastcgi_read_timeout ${NGINX_FASTCGI_READ_TIME};/g" /etc/nginx/sites-available/default.conf
+    if [ -f /etc/nginx/sites-available/default-ssl.conf ]; then
+        sed -i "s/fastcgi_read_timeout 300;/fastcgi_read_timeout ${NGINX_FASTCGI_READ_TIME};/g" /etc/nginx/sites-available/default-ssl.conf
+    fi
+fi
+
 # Enable xdebug
 XdebugFile='/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini'
 if [[ "$ENABLE_XDEBUG" == "1" ]] ; then
