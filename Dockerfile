@@ -179,6 +179,7 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
         freetype-dev \
         sqlite-dev \
         libjpeg-turbo-dev \
+        libxml2-dev \
     && docker-php-ext-configure \
         gd \
             --with-gd \
@@ -188,7 +189,7 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
         # curl \
         # iconv \
         # session \
-    && docker-php-ext-install \
+    && CFLAGS="-I/usr/src/php" docker-php-ext-install \
         pdo_mysql \
         pdo_sqlite \
         mysqli \
@@ -202,6 +203,8 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
         dom \
         zip \
         opcache \
+        xmlreader \
+        xmlrpc \
     && pecl install xdebug \
     && docker-php-source delete \
     && mkdir -p /etc/nginx \
@@ -222,7 +225,16 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     && mkdir -p /etc/letsencrypt/webrootauth \
     \
     # cleanup
-    && apk del gcc musl-dev linux-headers libffi-dev augeas-dev python-dev make autoconf
+    && apk del \
+        gcc \
+        musl-dev \
+        linux-headers \
+        libffi-dev \
+        augeas-dev \
+        python-dev \
+        make \
+        autoconf \
+        libxml2-dev
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 
