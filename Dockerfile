@@ -253,7 +253,7 @@ ADD conf/nginx-site-ssl.conf /etc/nginx/sites-available/default-ssl.conf
 RUN ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
 # tweak php-fpm config
-RUN echo "cgi.fix_pathinfo = 0" > ${php_vars} \
+RUN echo "cgi.fix_pathinfo = 1" > ${php_vars} \
     && echo "upload_max_filesize = 100M"  >> ${php_vars} \
     && echo "post_max_size = 100M"  >> ${php_vars} \
     && echo "variables_order = \"EGPCS\""  >> ${php_vars} \
