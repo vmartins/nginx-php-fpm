@@ -227,14 +227,23 @@ RUN echo @testing http://nl.alpinelinux.org/alpine/edge/testing >> /etc/apk/repo
     # cleanup
     && apk del \
         gcc \
-        musl-dev \
         linux-headers \
-        libffi-dev \
-        augeas-dev \
-        python-dev \
         make \
         autoconf \
-        libxml2-dev
+        python-dev \
+        augeas-dev \
+        openssl-dev \
+        musl-dev \
+        libmcrypt-dev \
+        libpng-dev \
+        icu-dev \
+        libxslt-dev \
+        libffi-dev \
+        freetype-dev \
+        sqlite-dev \
+        libjpeg-turbo-dev \
+        libxml2-dev \
+    && rm -rf /var/cache/apk/*
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 
